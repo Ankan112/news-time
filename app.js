@@ -7,7 +7,7 @@ fetch(url)
     });
 
 const displayItems = (items) => {
-    console.log(items)
+    // console.log(items)
     const allItems = document.getElementById('all-item')
     items.forEach(item => {
         const span = document.createElement('span')
@@ -28,7 +28,7 @@ const itemFunction = id => {
         });
 
     const displayAllNews = (allNews) => {
-        console.log(allNews.length)
+        // console.log(allNews.length)
         const allCards = document.getElementById('all-cards')
         allCards.textContent = '';
         const itemFound = document.createElement('h1')
@@ -51,16 +51,18 @@ const itemFunction = id => {
         <div class="d-flex justify-content-between align-items-center">
         <div>
         <img style="width: 50px" class="rounded-circle" src="${news.author.img}" alt="" />
-        <p>${news.author.name}</p>
+        <p>${news.author.name ? news.author.name : 'Not Found'}</p>
     </div>
     <div>
         <p>${news.author.published_date}</p>
-        <p><img src="https://img.icons8.com/external-others-inmotus-design/40/000000/external-View-basic-elements-others-inmotus-design.png"/> ${news.total_view}</p>
+        <p><img src="https://img.icons8.com/external-others-inmotus-design/40/000000/external-View-basic-elements-others-inmotus-design.png"/> ${news.total_view ? news.total_view : 'Not Found'}</p>
     </div>
     <div>
         <span>Ragings: ${news.rating.number}</span>
     </div>
-    <button type="button" class="btn btn-primary">Details</button>
+    <button id="show-btn" onclick="showDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Details
+</button>
     </div>
       </div>
     </div>
@@ -70,4 +72,27 @@ const itemFunction = id => {
             allCards.appendChild(div);
         })
     }
+
+}
+itemFunction(8);
+
+const showDetails = btnId => {
+    fetch(`https://openapi.programming-hero.com/api/news/${btnId}`)
+        .then(res => res.json())
+        .then(data => displayNewsDetails(data.data[0]))
+        .catch((error) => {
+            console.log(error)
+        });
+
+    const displayNewsDetails = news => {
+        console.log(news);
+        const modalTitle = document.getElementById('exampleModalLabel');
+        modalTitle.innerText = news.title;
+        const modalBody = document.getElementById('news-details');
+        modalBody.innerHTML = `
+        <p>${news.details}</p>
+        <h6>Published Date: ${news.author.published_date}</h6>
+        `
+    }
+
 }
