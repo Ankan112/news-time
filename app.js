@@ -33,14 +33,14 @@ const itemFunction = id => {
     const newsUrl = `https://openapi.programming-hero.com/api/news/category/0${id}`
     fetch(newsUrl)
         .then(res => res.json())
-        .then(data => displayAllNews(data.data))
+        .then(data => displayAllNews(data.data.sort(function (a, b) { return parseInt(b.total_view ? b.total_view : 0) - parseInt(a.total_view ? a.total_view : 0) })))
         .catch((error) => {
             console.log(error)
         });
 
 
     const displayAllNews = (allNews) => {
-        // console.log(allNews.length)
+        console.log(allNews)
 
         const allCards = document.getElementById('all-cards')
         allCards.textContent = '';
