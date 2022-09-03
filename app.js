@@ -40,7 +40,7 @@ const itemFunction = id => {
 
 
     const displayAllNews = (allNews) => {
-        console.log(allNews)
+        // console.log(allNews)
 
         const allCards = document.getElementById('all-cards')
         allCards.textContent = '';
@@ -101,7 +101,7 @@ const showDetails = btnId => {
         });
 
     const displayNewsDetails = news => {
-        console.log(news);
+        // console.log(news);
         const modalTitle = document.getElementById('exampleModalLabel');
         modalTitle.innerText = news.title;
         const modalBody = document.getElementById('news-details');
