@@ -107,6 +107,8 @@ const showDetails = btnId => {
         const modalBody = document.getElementById('news-details');
         modalBody.innerHTML = `
         <p>${news.details}</p>
+        <h5>Author: ${news.author.name ? news.author.name : 'Not Found'}</h5>
+        <h6>Total View: ${news.total_view ? news.total_view : 'Not Found'}</h6>
         <h6>Published Date: ${news.author.published_date ? news.author.published_date : 'Not Found'}</h6>
         `
     }
