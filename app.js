@@ -50,10 +50,9 @@ const itemFunction = id => {
         allNews.forEach(news => {
             // console.log(news)
             const div = document.createElement('div')
-            // div.classList.add('col-12 col-md-6')
             div.innerHTML = `
             
-        <div class="card mb-3" >
+        <div class="card my-3" >
   <div class="row g-0">
     <div class="col-12 col-md-4">
       <img class="img-fluid" style="width:100%" src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
