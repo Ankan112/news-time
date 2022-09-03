@@ -50,18 +50,19 @@ const itemFunction = id => {
         allNews.forEach(news => {
             // console.log(news)
             const div = document.createElement('div')
+            // div.classList.add('col-12 col-md-6')
             div.innerHTML = `
             
-        <div class="card mb-3" style="max-width: 800px;">
+        <div class="card mb-3" >
   <div class="row g-0">
-    <div class="col-md-4">
-      <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+    <div class="col-12 col-md-4">
+      <img class="img-fluid" style="width:100%" src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
     </div>
-    <div class="col-md-8">
+    <div class="col-12 col-md-8">
       <div class="card-body">
-        <h5 class="card-title">${news.title}</h5>
-        <p class="card-text">${news.details.slice(0, 250).concat('...')}</p>
-        <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-title fs-3">${news.title}</h5>
+        <p class="card-text">${news.details.slice(0, 450).concat('...')}</p>
+    <div style="height: 200px" class="d-flex justify-content-between align-items-center">
         <div>
         <img style="width: 50px" class="rounded-circle" src="${news.author.img}" alt="" />
         <p>${news.author.name ? news.author.name : 'Not Found'}</p>
@@ -71,7 +72,7 @@ const itemFunction = id => {
         <p><img src="https://img.icons8.com/external-others-inmotus-design/40/000000/external-View-basic-elements-others-inmotus-design.png"/> ${news.total_view ? news.total_view : 'Not Found'}</p>
     </div>
     <div>
-        <span>Ragings: ${news.rating.number}</span>
+        <span>Ratings: ${news.rating.number}</span>
     </div>
     <button id="show-btn" onclick="showDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Details
