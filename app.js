@@ -16,7 +16,18 @@ const displayItems = (items) => {
         `
         allItems.appendChild(span)
     })
+
 }
+const toggleLoader = isLoading => {
+    const loader = document.getElementById('loader')
+    if (isLoading) {
+        loader.classList.remove('d-none')
+    }
+    else {
+        loader.classList.add('d-none')
+    }
+}
+
 const itemFunction = id => {
     // console.log(id)
     const newsUrl = `https://openapi.programming-hero.com/api/news/category/0${id}`
@@ -27,8 +38,10 @@ const itemFunction = id => {
             console.log(error)
         });
 
+
     const displayAllNews = (allNews) => {
         // console.log(allNews.length)
+
         const allCards = document.getElementById('all-cards')
         allCards.textContent = '';
         const itemFound = document.createElement('h1')
@@ -54,7 +67,7 @@ const itemFunction = id => {
         <p>${news.author.name ? news.author.name : 'Not Found'}</p>
     </div>
     <div>
-        <p>${news.author.published_date}</p>
+        <p>${news.author.published_date ? news.author.published_date : 'Not Found'}</p>
         <p><img src="https://img.icons8.com/external-others-inmotus-design/40/000000/external-View-basic-elements-others-inmotus-design.png"/> ${news.total_view ? news.total_view : 'Not Found'}</p>
     </div>
     <div>
@@ -71,11 +84,13 @@ const itemFunction = id => {
         `
             allCards.appendChild(div);
         })
+        toggleLoader(false);
     }
-
+    toggleLoader(true);
 }
-itemFunction(8);
 
+itemFunction(8);
+toggleLoader(true);
 const showDetails = btnId => {
     fetch(`https://openapi.programming-hero.com/api/news/${btnId}`)
         .then(res => res.json())
@@ -91,7 +106,7 @@ const showDetails = btnId => {
         const modalBody = document.getElementById('news-details');
         modalBody.innerHTML = `
         <p>${news.details}</p>
-        <h6>Published Date: ${news.author.published_date}</h6>
+        <h6>Published Date: ${news.author.published_date ? news.author.published_date : 'Not Found'}</h6>
         `
     }
 
